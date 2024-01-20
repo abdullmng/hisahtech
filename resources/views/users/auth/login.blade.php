@@ -27,7 +27,7 @@
                     Remeber this Device
                   </label>
                 </div>
-                <a class="text-primary fw-medium" href="/user/forgot">Forgot Password ?</a>
+                <a class="text-primary fw-medium" href="{{ route('user.forgot') }}">Forgot Password ?</a>
             </div>
             <div>
                 @if(session()->has('status'))
@@ -37,7 +37,7 @@
             <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</button>
             <div class="d-flex align-items-center">
                 <p class="fs-4 mb-0 text-dark">Don't have an Account?</p>
-                <a class="text-primary fw-medium ms-2" href="/user/register">Sign Up</a>
+                <a class="text-primary fw-medium ms-2" href="{{ route('user.register') }}">Sign Up</a>
             </div>
         </form>
     </div>
