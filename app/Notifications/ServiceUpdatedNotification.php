@@ -36,6 +36,7 @@ class ServiceUpdatedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $status = ucwords(str_replace('_', ' ', $this->service->status));
         return (new MailMessage)
                     ->greeting("Hello {$notifiable->name}")
                     ->line("Your service request with detail below, has an update")
@@ -43,7 +44,7 @@ class ServiceUpdatedNotification extends Notification
                     ->line("Model: {$this->service->device->model}.")
                     ->line("Issue as described:")
                     ->line(new HtmlString($this->service->issue))
-                    ->line("Status: {$this->service->status}");
+                    ->line("Status: {$status}");
     }
 
     /**

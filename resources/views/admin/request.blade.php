@@ -25,10 +25,10 @@
                             <select name="status" id="status" class="form-control form-select">
                                 <option value="">Select status</option>
                                 @php
-                                    $statuses = ['pending', 'attending', 'completed'];
+                                    $statuses = ['pending', 'attending', 'completed', 'unsuccessful', 'motherboard_replacement_required'];
                                 @endphp
                                 @foreach ($statuses as $status)
-                                    <option value="{{ $status }}" {{ $service->status == $status ? 'selected' : '' }}>{{ ucwords($status) }}</option>
+                                    <option value="{{ $status }}" {{ $service->status == $status ? 'selected' : '' }}>{{ ucwords(str_replace('_', ' ', $status)) }}</option>
                                 @endforeach
                             </select>
                             <button type="submit" class="btn btn-primary">Update</button>
@@ -67,6 +67,12 @@
                     <p>Ram Size (GB): {{ $service->device->ram_size }}</p>
                     <p>Storage (GB): {{ $service->device->storage_size }}</p>
                 </div>
+                <div class="mb-4">
+                    <h4>User Contacts</h4>
+                    <p><strong>Email:</strong> {{ $service->user->email }}</p>
+                    <p><strong>Phone Number:</strong> {{ $service->user->phone_number }}</p>
+                </div>
+
                 <div class="mb-4">
                     <h4>Issue</h4>
                 </div>
