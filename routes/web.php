@@ -49,6 +49,8 @@ Route::group(['prefix'=> 'user'], function () {
 
         Route::get('/invoices', [UserController::class,'invoices'])->name('user.invoices');
         Route::get('/invoices/{invoice_id}', [UserController::class,'showInvoice'])->name('user.showInvoice');
+
+        Route::get('/logout', [UserController::class,'logout'])->name('user.logout');
     });
 });
 

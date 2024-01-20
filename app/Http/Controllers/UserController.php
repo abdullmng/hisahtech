@@ -29,10 +29,11 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users',
             'phone_number' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'terms' => 'required'
         ]);
 
-        $details = $request->except('_token');
+        $details = $request->except('_token', 'terms');
         $user = User::create($details);
         Auth::login($user);
         event(new UserRegistered($user));
@@ -186,5 +187,11 @@ class UserController extends Controller
     {
         $service = RepairRequest::find($request_id);
         return view('users.request', ['service'=> $service]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('user.login'));
     }
 }
