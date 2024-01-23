@@ -66,6 +66,7 @@
                                         <td>
                                             <a href="{{ route('admin.get_device', $device->id) }}" class="btn btn-primary btn-sm">Edit</a>
                                             <a href="{{ route('admin.delete_device', $device->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('are you sure you want to delete this device?')">Delete</a>
+                                            <a href="{{ route('admin.print_device_invoice', $device->id) }}" class="btn btn-dark btn-sm">Print Invoice</a>
                                         </td>
                                     </tr>
                                     @endforeach

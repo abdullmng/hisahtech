@@ -49,6 +49,7 @@ Route::group(['prefix'=> 'user'], function () {
 
         Route::get('/invoices', [UserController::class,'invoices'])->name('user.invoices');
         Route::get('/invoices/{invoice_id}', [UserController::class,'showInvoice'])->name('user.showInvoice');
+        Route::get('/invoices/print/{invoice_id}', [UserController::class,'printInvoice'])->name('user.print_invoice');
 
         Route::get('/logout', [UserController::class,'logout'])->name('user.logout');
     });
@@ -101,6 +102,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/', [AdminController::class,'settings'])->name('admin.settings');
             Route::post('/', [AdminController::class,'SaveSettings'])->name('admin.save_settings');
         });
+
+        Route::get('/devices/invoice/print/{device_id}', [AdminController::class,'printDeviceInvoice'])->name('admin.print_device_invoice');
 
         Route::get('logout', [AdminController::class,'logout'])->name('admin.logout');
     });

@@ -12,6 +12,7 @@ use App\Models\Device;
 use App\Models\Invoice;
 use App\Models\RepairRequest;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -230,7 +231,7 @@ class AdminController extends Controller
         $data['status'] = 'active';
         $device = Device::create($data);
         event(new DeviceCreated($device, $user, true));
-        return back()->with('success','Device created');
+        return redirect(route('admin.devices'))->with('success','Device created');
     }
 
     public function getDevice($id)
@@ -286,6 +287,13 @@ class AdminController extends Controller
         }
 
         return back()->with('success','Settings saved');
+    }
+
+    public function printDeviceInvoice($device_id)
+    {
+        $invoice = Invoice::where('item_id', $device_id)->where('item_type', 'device')->first();
+        $pdf = Pdf::loadView('users.prints.invoice', ["invoice" => $invoice]);
+        return $pdf->stream('invoice.pdf');
     }
 
     public function logout()

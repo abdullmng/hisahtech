@@ -33,12 +33,13 @@
         </div>
         <div class="mb-4">
             @if ($invoice->status != 'paid')
-                <form action="" id="pay-form">
+                <form action="" id="pay-form" style="display: inline">
                     <input type="hidden" value="{{ $invoice->amount }}" id="amount">
                     <input type="hidden" value="{{ $invoice->invoice_number }}" id="ref">
                     <button type="submit" class="btn btn-success" id="pay-btn">Pay Now</button>
                 </form>
             @endif
+            <a href="{{ route('user.print_invoice',$invoice->id) }}" class="btn btn-warning">Print</a>
         </div>
       </div>
     </div>

@@ -9,6 +9,7 @@ use App\Models\Device;
 use App\Models\Invoice;
 use App\Models\RepairRequest;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -193,5 +194,12 @@ class UserController extends Controller
     {
         Auth::logout();
         return redirect(route('user.login'));
+    }
+
+    public function printInvoice($invoice_id)
+    {
+        $invoice = Invoice::find($invoice_id);
+        $pdf = Pdf::loadView('users.prints.invoice', ["invoice" => $invoice]);
+        return $pdf->stream('invoice.pdf');
     }
 }
